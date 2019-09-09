@@ -6,8 +6,6 @@ namespace SixCard.Modules
     public class PublicModule : ModuleBase<SocketCommandContext>
     {
         private static int Counter;
-        //Dependcy injected
-        public CardService CardService { get; set; }
 
         [Command("!help")]
         public Task Help()
