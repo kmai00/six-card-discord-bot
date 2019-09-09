@@ -15,7 +15,15 @@ namespace SixCard.Modules
         public Task NewGame()
         {
             // Basically make a new deck
-            // Deal the deck to x amount of players (TODO figure out how to parse that)
+            // Prompt player to see who's in. Make check in to determine possible
+            //Use message user as key to manage thatn
+            //DM player's hand
+            //DM player current status hand
+            //Keep track of starting player (index)
+            //Rotate players
+            //Special rule for final
+            //property for who's in or not
+            //Player object
             Deck = _CardService.MakeUnshuffledDeck();
             Deck = _CardService.ShuffleDeck(Deck);
 
