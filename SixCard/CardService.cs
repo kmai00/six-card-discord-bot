@@ -8,9 +8,14 @@ namespace SixCard
 {
     public class CardService
     {
+        public CardService()
+        {
+            Cards = new List<Card>();
+        }
+
         public static List<Card> Cards;
 
-        public void MakeDeck()
+        public void MakeUnshuffledDeck()
         {
             foreach (var suit in (Suits[])Enum.GetValues(typeof(Suits)))
             {
