@@ -27,10 +27,11 @@ namespace Tests
             int cardIndex = 0;
             foreach (var suit in (Suits[])Enum.GetValues(typeof(Suits)))
             {
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < 13; i++)
                 {
                     Assert.AreEqual(i + 2, result[cardIndex].Value);
                     Assert.AreEqual(suit, result[cardIndex].Suit);
+                    cardIndex++;
                 }
             }
         }

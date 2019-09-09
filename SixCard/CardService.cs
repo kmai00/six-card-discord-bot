@@ -21,9 +21,10 @@ namespace SixCard
             {
                 for (int i = 0; i < 13; i++)
                 {
-                    Cards.Add(new Card(i, suit));
+                    Cards.Add(new Card(i + 2, suit));
                 }
             }
+
         }
     }
 }
