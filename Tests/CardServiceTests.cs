@@ -19,9 +19,8 @@ namespace Tests
         [Test]
         public void MakeDeck_CorrectlyMakeStandard52Deck()
         {
-            _Sut.MakeUnshuffledDeck();
+            var result = _Sut.MakeUnshuffledDeck();
 
-            var result = CardService.Cards;
             Assert.AreEqual(52, result.Count);
 
             int cardIndex = 0;

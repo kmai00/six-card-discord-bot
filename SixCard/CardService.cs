@@ -8,23 +8,21 @@ namespace SixCard
 {
     public class CardService
     {
-        public CardService()
-        {
-            Cards = new List<Card>();
-        }
+        public CardService() { }
 
-        public static List<Card> Cards;
-
-        public void MakeUnshuffledDeck()
+        public List<Card> MakeUnshuffledDeck()
         {
+            var cards = new List<Card>();
+
             foreach (var suit in (Suits[])Enum.GetValues(typeof(Suits)))
             {
                 for (int i = 0; i < DefaultValues.NumberOfCards; i++)
                 {
-                    Cards.Add(new Card(i + 2, suit));
+                    cards.Add(new Card(i + 2, suit));
                 }
             }
 
+            return cards;
         }
     }
 }
