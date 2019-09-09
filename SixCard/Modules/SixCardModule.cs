@@ -22,7 +22,11 @@ namespace SixCard.Modules
             return ReplyAsync("New Deck generated");
         }
 
+        //TODO kmai make a DM that draws for players and check if there is enough to deal
+
+
         [Command("Draw")]
+        [Summary("Testing Draw Methods")]
         public Task Draw()
         {
             var card = Deck[0];

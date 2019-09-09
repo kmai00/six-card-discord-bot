@@ -1,6 +1,7 @@
 ﻿using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -41,6 +42,12 @@ namespace SixCard.Modules
         public Task Message(string message)
         {
             return Context.User.SendMessageAsync(message);
+        }
+
+        [Command("Error")]
+        public Task Error()
+        {
+            throw new Exception("Test Exception");
         }
 
     }
