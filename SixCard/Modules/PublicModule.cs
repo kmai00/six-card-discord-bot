@@ -1,4 +1,7 @@
-﻿using Discord.Commands;
+﻿using Discord;
+using Discord.Commands;
+using Discord.WebSocket;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SixCard.Modules
@@ -32,6 +35,12 @@ namespace SixCard.Modules
         public Task Echo([Remainder]string input)
         {
             return ReplyAsync(input);
+        }
+
+        [Command("message")]
+        public Task Message(string message)
+        {
+            return Context.User.SendMessageAsync(message);
         }
 
     }
