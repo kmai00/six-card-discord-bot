@@ -39,6 +39,10 @@ namespace SixCard.Dtos
             {
                 value = "Ace";
             }
+            else
+            {
+                value = Value.ToString();
+            }
 
             return $"{value}-{Suit.ToString()}";
         }
