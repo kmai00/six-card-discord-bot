@@ -11,8 +11,6 @@ namespace SixCard
 {
     public class Startup
     {
-        private const string TOKEN = "NjIwMzg5MjYzMzEzNDY5NDQw.XXWEvQ.Yutd04W3Y2-poSjmgM7VD8mLxPY";
-
         public static void Main(string[] args)
         {
             new Startup().MainAsync().GetAwaiter().GetResult();
@@ -27,7 +25,7 @@ namespace SixCard
                 client.Log += LogAsync;
                 services.GetRequiredService<CommandService>().Log += LogAsync;
 
-                await client.LoginAsync(TokenType.Bot, TOKEN);
+                await client.LoginAsync(TokenType.Bot, Environment.GetEnvironmentVariable("SIX_CARD_BOT_TOKEN"));
                 await client.StartAsync();
 
                 await services.GetRequiredService<CommandHandlingService>().InitializeAsync();
