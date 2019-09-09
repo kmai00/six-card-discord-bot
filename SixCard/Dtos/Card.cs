@@ -1,7 +1,4 @@
 ﻿using SixCard.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SixCard.Dtos
 {
@@ -12,6 +9,12 @@ namespace SixCard.Dtos
         {
             Value = value;
             Suit = suit;
+        }
+
+        public Card(Card card)
+        {
+            Value = card.Value;
+            Suit = card.Suit;
         }
 
         public int Value;

@@ -35,5 +35,26 @@ namespace Tests
             }
         }
 
+        [Test]
+        public void ShuffleDeck_NotOrderedAtleast()
+        {
+            // At least one card is different from default
+            // I know there a chance that we can get the same deck again, but...come on..this is just for fun
+
+            var unshuffledDeck = _Sut.MakeUnshuffledDeck();
+            var shuffledDeck = _Sut.ShuffleDeck(unshuffledDeck);
+
+            var isDifferent = false;
+            for (var i = 0; i < 52; i++)
+            {
+                if (shuffledDeck[i].Value != unshuffledDeck[i].Value)
+                {
+                    isDifferent = true;
+                    break;
+                }
+            }
+
+            Assert.IsTrue(isDifferent);
+        }
     }
 }
