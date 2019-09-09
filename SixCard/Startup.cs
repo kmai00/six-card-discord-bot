@@ -30,7 +30,7 @@ namespace SixCard
                 await client.LoginAsync(TokenType.Bot, TOKEN);
                 await client.StartAsync();
 
-                await _Commands.AddModulesAsync(Assembly.GetEntryAssembly(), _Services);
+                await services.GetRequiredService<CommandHandlingService>().InitializeAsync();
 
                 await Task.Delay(-1);
             }
@@ -47,9 +47,9 @@ namespace SixCard
         {
             return new ServiceCollection()
                 .AddSingleton<DiscordSocketClient>()
-                .AddSingleton<HttpClient>()
                 .AddSingleton<CommandService>()
                 .AddSingleton<CommandHandlingService>()
+                .AddSingleton<HttpClient>()
                 .AddSingleton<CardService>()
                 .BuildServiceProvider();
         }

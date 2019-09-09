@@ -6,9 +6,5 @@ namespace SixCard
 {
     public class CardService
     {
-        public string Test()
-        {
-            return "Hello World!";
-        }
     }
 }

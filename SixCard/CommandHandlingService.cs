@@ -20,13 +20,14 @@ namespace SixCard
             _Discord = services.GetRequiredService<DiscordSocketClient>();
             _Services = services;
 
-            //Command Hook
-            _Commands.CommandExecuted += CommandExecutedAsync;
-            _Discord.MessageReceived += MessageReceivedAsync;
         }
 
         public async Task InitializeAsync()
         {
+            //Command Hook
+            _Discord.MessageReceived += MessageReceivedAsync;
+            _Commands.CommandExecuted += CommandExecutedAsync;
+
             await _Commands.AddModulesAsync(Assembly.GetEntryAssembly(), _Services);
         }
 
@@ -35,8 +36,6 @@ namespace SixCard
             //Ignore system messages or messages from other bots
             if (!(rawMessage is SocketUserMessage message)) return;
             if (message.Source != MessageSource.User) return;
-
-            message.
 
             var argPos = 0;
             if (!message.HasMentionPrefix(_Discord.CurrentUser, ref argPos)) return;
