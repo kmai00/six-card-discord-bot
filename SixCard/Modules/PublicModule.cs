@@ -28,5 +28,11 @@ namespace SixCard.Modules
             return ReplyAsync($"Counter: {Counter}");
         }
 
+        [Command("echo")]
+        public Task Echo([Remainder]string input)
+        {
+            return ReplyAsync(input);
+        }
+
     }
 }
