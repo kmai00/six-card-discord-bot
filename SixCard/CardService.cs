@@ -19,7 +19,7 @@ namespace SixCard
         {
             foreach (var suit in (Suits[])Enum.GetValues(typeof(Suits)))
             {
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < 13; i++)
                 {
                     Cards.Add(new Card(i, suit));
                 }

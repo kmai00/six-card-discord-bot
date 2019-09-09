@@ -5,6 +5,7 @@ using System;
 
 namespace Tests
 {
+    [TestFixture]
     public class CardServiceTests
     {
         CardService _Sut;
