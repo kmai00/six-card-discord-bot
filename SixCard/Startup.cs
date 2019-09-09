@@ -1,30 +1,56 @@
-﻿using Discord.Commands;
+﻿using Discord;
+using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace SixCard
 {
     public class Startup
     {
-        private DiscordSocketClient _Client;
-        private CommandService _Commands;
-        private IServiceProvider _Services;
+        private const string TOKEN = "NjIwMzg5MjYzMzEzNDY5NDQw.XXWEvQ.Yutd04W3Y2-poSjmgM7VD8mLxPY";
 
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            new Startup().MainAsync().GetAwaiter().GetResult();
         }
 
-        public async Task RunBotAsync()
+        public async Task MainAsync()
         {
-            _Client = new DiscordSocketClient();
-            _Commands = new CommandService();
+            using (var services = ConfigurationServices())
+            {
+                var client = services.GetRequiredService<DiscordSocketClient>();
 
-            _Services = new ServiceCollection()
-                .AddSingleton(_Client)
-                .AddSingleton(_Commands)
+                client.Log += LogAsync;
+                services.GetRequiredService<CommandService>().Log += LogAsync;
+
+                await client.LoginAsync(TokenType.Bot, TOKEN);
+                await client.StartAsync();
+
+                await _Commands.AddModulesAsync(Assembly.GetEntryAssembly(), _Services);
+
+                await Task.Delay(-1);
+            }
+        }
+
+        private Task LogAsync(LogMessage log)
+        {
+            Console.WriteLine(log.ToString());
+
+            return Task.CompletedTask;
+        }
+
+        private ServiceProvider ConfigurationServices()
+        {
+            return new ServiceCollection()
+                .AddSingleton<DiscordSocketClient>()
+                .AddSingleton<HttpClient>()
+                .AddSingleton<CommandService>()
+                .AddSingleton<CommandHandlingService>()
+                .AddSingleton<CardService>()
                 .BuildServiceProvider();
         }
     }
