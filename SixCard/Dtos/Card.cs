@@ -25,26 +25,43 @@ namespace SixCard.Dtos
             var value = "";
             if (Value == 11)
             {
-                value = "Jack";
+                value = "J";
             }
             else if (Value == 12)
             {
-                value = "Queen";
+                value = "Q";
             }
             else if (Value == 13)
             {
-                value = "King";
+                value = "K";
             }
             else if (Value == 14)
             {
-                value = "Ace";
+                value = "A";
             }
             else
             {
                 value = Value.ToString();
             }
 
-            return $"{value}-{Suit.ToString()}";
+            var suit = "";
+            switch (Suit)
+            {
+                case Suits.CLUBS:
+                    suit = ":clubs:";
+                    break;
+                case Suits.DIAMONDS:
+                    suit = ":diamonds:";
+                    break;
+                case Suits.HEARTS:
+                    suit = ":hearts:";
+                    break;
+                case Suits.SPADES:
+                    suit = ":spades:";
+                    break;
+            }
+
+            return $"{value}{suit}";
         }
     }
 }

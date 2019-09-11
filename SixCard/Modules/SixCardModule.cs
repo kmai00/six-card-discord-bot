@@ -1,4 +1,5 @@
-﻿using Discord.Commands;
+﻿using Discord;
+using Discord.Commands;
 using SixCard.Dtos;
 using SixCard.Services;
 using System.Collections.Generic;
@@ -37,6 +38,8 @@ namespace SixCard.Modules
         [Summary("Register user to the game")]
         public Task RegisterPlayers()
         {
+            //TODO add check for amount of players
+
             var user = Context.User;
             if (_GameState.HasJoined(user.Username))
             {
@@ -45,6 +48,21 @@ namespace SixCard.Modules
 
             _GameState.AddPlayer(user);
             return ReplyAsync($"{user.Username} has joined the game!");
+        }
+
+        [Command("Start")]
+        public Task StartGame()
+        {
+            var players = GameStateService.Players;
+            foreach (var player in players)
+            {
+                var result = _CardService.Draw(GameStateService.Deck, 6);
+                _GameState.SetDeck(result.Item2);
+                player.Cards = result.Item1;
+                var cards = string.Join("\n", player.Cards);
+                player.User.SendMessageAsync($"Your hand is:\n{cards}");
+            }
+            return ReplyAsync("Cards have been delt!");
         }
 
         [Command("Draw")]
