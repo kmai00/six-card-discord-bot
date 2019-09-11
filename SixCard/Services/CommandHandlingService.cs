@@ -6,7 +6,7 @@ using System;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace SixCard
+namespace SixCard.Services
 {
     public class CommandHandlingService : ModuleBase<SocketCommandContext>
     {

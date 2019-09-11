@@ -1,5 +1,6 @@
 ﻿using Discord.Commands;
 using SixCard.Dtos;
+using SixCard.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -7,9 +8,9 @@ namespace SixCard.Modules
 {
     public class SixCardModule : ModuleBase<SocketCommandContext>
     {
-        private static List<Card> Deck;
         //Dependcy injected
         public CardService _CardService { get; set; }
+        public GameStateService _GameState { get; set; }
 
         [Command("New")]
         public Task NewGame()
@@ -24,10 +25,11 @@ namespace SixCard.Modules
             //Special rule for final
             //property for who's in or not
             //Player object
-            Deck = _CardService.MakeUnshuffledDeck();
-            Deck = _CardService.ShuffleDeck(Deck);
+            var deck = _CardService.MakeUnshuffledDeck();
+            var shuffledDeck = _CardService.ShuffleDeck(deck);
+            _GameState.SetDeck(shuffledDeck);
 
-            return ReplyAsync("New Deck generated");
+            return ReplyAsync("Deck shuffled and ready to go! \n Who's in? (Please reply 'Me!' to join)");
         }
 
         //TODO kmai make a DM that draws for players and check if there is enough to deal
@@ -37,10 +39,13 @@ namespace SixCard.Modules
         [Summary("Testing Draw Methods")]
         public Task Draw()
         {
-            var card = Deck[0];
-            Deck.RemoveAt(0);
+            var result = _CardService.Draw(GameStateService.Deck);
+            var drawnCard = result.Item1;
+            var deck = result.Item2;
 
-            return ReplyAsync($"You drew: {card.ToString()} | {Deck.Count} cards remaining");
+            _GameState.SetDeck(deck);
+
+            return ReplyAsync($"You drew: {drawnCard.ToString()} | {deck.Count} cards remaining");
         }
     }
 }

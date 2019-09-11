@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SixCard
+namespace SixCard.Services
 {
     public class CardService
     {
@@ -28,6 +28,13 @@ namespace SixCard
         public List<Card> ShuffleDeck(List<Card> deck)
         {
             return deck.Select(c => new Card(c)).OrderBy(c => Guid.NewGuid()).ToList();
+        }
+
+        public Tuple<Card, List<Card>> Draw(List<Card> deck)
+        {
+            var copyDeck = deck.Select(c => new Card(c)).ToList();
+
+            return new Tuple<Card, List<Card>>(copyDeck.First(), copyDeck.Skip(1).ToList());
         }
     }
 }

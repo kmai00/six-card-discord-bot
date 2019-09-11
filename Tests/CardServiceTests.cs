@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using SixCard;
 using SixCard.Enums;
+using SixCard.Services;
 using System;
 
 namespace Tests

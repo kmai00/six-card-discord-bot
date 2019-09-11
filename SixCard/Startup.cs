@@ -2,7 +2,7 @@
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
-using SixCard.Modules;
+using SixCard.Services;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -49,6 +49,7 @@ namespace SixCard
                 .AddSingleton<CommandHandlingService>()
                 .AddSingleton<HttpClient>()
                 .AddSingleton<CardService>()
+                .AddSingleton<GameStateService>()
                 .BuildServiceProvider();
         }
     }
