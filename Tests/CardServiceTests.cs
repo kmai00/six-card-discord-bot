@@ -1,8 +1,11 @@
 ﻿using NUnit.Framework;
 using SixCard;
+using SixCard.Dtos;
 using SixCard.Enums;
 using SixCard.Services;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Tests
 {
@@ -56,6 +59,26 @@ namespace Tests
             }
 
             Assert.IsTrue(isDifferent);
+        }
+
+        [Test]
+        public void Draw_ReturnCorrectCardAndDeck()
+        {
+            var deck = new List<Card>
+            {
+                new Card(1, Suits.CLUBS),
+                new Card(2, Suits.CLUBS)
+            };
+
+            var result = _Sut.Draw(deck);
+            var drawnCard = result.Item1;
+            var resultingDeck = result.Item2;
+
+            Assert.AreEqual(1, drawnCard.Value);
+            Assert.AreEqual(Suits.CLUBS, drawnCard.Suit);
+            Assert.AreEqual(1, resultingDeck.Count);
+            Assert.AreEqual(2, resultingDeck.First().Value);
+            Assert.AreEqual(Suits.CLUBS, resultingDeck.First().Suit);
         }
     }
 }
