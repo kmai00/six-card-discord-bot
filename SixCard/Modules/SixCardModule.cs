@@ -29,11 +29,12 @@ namespace SixCard.Modules
             var shuffledDeck = _CardService.ShuffleDeck(deck);
             _GameState.SetDeck(shuffledDeck);
 
-            return ReplyAsync("Deck shuffled and ready to go! \n Who's in? (Please reply 'Me!' to join)");
+            return ReplyAsync("Deck shuffled and ready to go! \n Who's in? (Please reply 'In' to join)");
         }
 
         //TODO kmai make a DM that draws for players and check if there is enough to deal
-        [Command("Me!")]
+        [Command("In")]
+        [Summary("Register user to the game")]
         public Task RegisterPlayers()
         {
             var user = Context.User;

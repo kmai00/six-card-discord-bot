@@ -80,5 +80,23 @@ namespace Tests
             Assert.AreEqual(2, resultingDeck.First().Value);
             Assert.AreEqual(Suits.CLUBS, resultingDeck.First().Suit);
         }
+
+        [Test]
+        public void Draw_MultipleCards()
+        {
+            var deck = new List<Card>
+            {
+                new Card(1, Suits.CLUBS),
+                new Card(2, Suits.CLUBS)
+            };
+
+            var result = _Sut.Draw(deck, 2);
+            var drawnCards = result.Item1;
+            var resultingDeck = result.Item2;
+
+            Assert.AreEqual(2, drawnCards.Count);
+            Assert.IsEmpty(resultingDeck);
+        }
+
     }
 }

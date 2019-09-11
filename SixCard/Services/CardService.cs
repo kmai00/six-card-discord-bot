@@ -30,11 +30,20 @@ namespace SixCard.Services
             return deck.Select(c => new Card(c)).OrderBy(c => Guid.NewGuid()).ToList();
         }
 
-        public Tuple<Card, List<Card>> Draw(List<Card> deck)
+        public Tuple<List<Card>, List<Card>> Draw(List<Card> deck, int drawAmount)
         {
             var copyDeck = deck.Select(c => new Card(c)).ToList();
 
-            return new Tuple<Card, List<Card>>(copyDeck.First(), copyDeck.Skip(1).ToList());
+            return new Tuple<List<Card>, List<Card>>(
+                copyDeck.Take(drawAmount).ToList(),
+                copyDeck.Skip(drawAmount).ToList());
         }
+
+        public Tuple<Card, List<Card>> Draw(List<Card> deck)
+        {
+            var result = Draw(deck, 1);
+            return new Tuple<Card, List<Card>>(result.Item1.First(), result.Item2);
+        }
+
     }
 }

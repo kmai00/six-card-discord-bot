@@ -11,12 +11,12 @@ namespace SixCard.Services
     {
         public static List<Card> Deck { get; private set; }
 
-        public static List<SocketUser> Players { get; private set; }
+        public static List<Player> Players { get; private set; }
 
         public GameStateService()
         {
             Deck = new List<Card>();
-            Players = new List<SocketUser>();
+            Players = new List<Player>();
         }
 
         public void SetDeck(List<Card> deck)
@@ -26,12 +26,12 @@ namespace SixCard.Services
 
         public void AddPlayer(SocketUser player)
         {
-            Players.Add(player);
+            Players.Add(new Player(player));
         }
 
         public bool HasJoined(string username)
         {
-            return Players.Any(p => p.Username == username);
+            return Players.Any(p => p.Name == username);
         }
     }
 }

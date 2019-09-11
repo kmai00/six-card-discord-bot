@@ -1,18 +1,21 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using Discord.WebSocket;
+using System.Collections.Generic;
 
 namespace SixCard.Dtos
 {
     public class Player
     {
-        public string Name { get; private set; }
+
+        public Player(SocketUser user)
+        {
+            User = user;
+            Cards = new List<Card>();
+        }
+
+        public SocketUser User { get; private set; }
 
         public List<Card> Cards { get; set; }
 
-        public Player(string name)
-        {
-            Name = name;
-            Cards = new List<Card>();
-        }
+        public string Name { get { return User.Username; } }
     }
 }
