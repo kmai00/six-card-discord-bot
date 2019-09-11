@@ -33,7 +33,18 @@ namespace SixCard.Modules
         }
 
         //TODO kmai make a DM that draws for players and check if there is enough to deal
+        [Command("Me!")]
+        public Task RegisterPlayers()
+        {
+            var user = Context.User;
+            if (_GameState.HasJoined(user.Username))
+            {
+                return ReplyAsync($"{user.Username} has already joined...");
+            }
 
+            _GameState.AddPlayer(user);
+            return ReplyAsync($"{user.Username} has joined the game!");
+        }
 
         [Command("Draw")]
         [Summary("Testing Draw Methods")]
