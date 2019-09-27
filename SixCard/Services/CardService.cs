@@ -45,5 +45,21 @@ namespace SixCard.Services
             return new Tuple<Card, List<Card>>(result.Item1.First(), result.Item2);
         }
 
+        //Todo determine if I want to override the > operator
+        public bool CanCurrentCardBeatOtherCard(Card currentCard, Card otherCard)
+        {
+            if (currentCard.Equals(otherCard))
+            {
+                throw new Exception("The two cards are the same.");
+            }
+
+            if (currentCard.Suit != otherCard.Suit)
+            {
+                return false;
+            }
+
+            return currentCard.Value > otherCard.Value;
+        }
+
     }
 }

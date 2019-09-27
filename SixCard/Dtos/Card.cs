@@ -20,6 +20,17 @@ namespace SixCard.Dtos
         public int Value;
         public Suits Suit;
 
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+        
+            var card = (Card)obj;
+            return Value == card.Value && Suit == card.Suit;
+        }
+
         public override string ToString()
         {
             var value = "";

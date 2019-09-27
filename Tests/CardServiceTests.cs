@@ -98,5 +98,26 @@ namespace Tests
             Assert.IsEmpty(resultingDeck);
         }
 
+        [TestCase(Suits.CLUBS, 1, Suits.DIAMONDS, 1, false)]
+        [TestCase(Suits.CLUBS, 1, Suits.CLUBS, 8, false)]
+        [TestCase(Suits.CLUBS, 8, Suits.CLUBS, 1, true)]
+        public void CanCurrentCardBeatOtherCard(
+            Suits currentSuit, int currentValue,
+            Suits otherSuit, int otherValue,
+            bool expectedResult)
+        {
+            var currentCard = new Card(currentValue, currentSuit);
+            var otherCard = new Card(otherValue, otherSuit);
+
+            var result = _Sut.CanCurrentCardBeatOtherCard(currentCard, otherCard);
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        //[TestCase(Suits.CLUBS, 1, Suits.CLUBS, 1, false)]
+        //public void CanCurrentCardBeathOtherCard_ThrowsErrorForSameCard()
+        //{
+
+        //}
+
     }
 }
