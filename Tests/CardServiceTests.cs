@@ -113,11 +113,13 @@ namespace Tests
             Assert.AreEqual(expectedResult, result);
         }
 
-        //[TestCase(Suits.CLUBS, 1, Suits.CLUBS, 1, false)]
-        //public void CanCurrentCardBeathOtherCard_ThrowsErrorForSameCard()
-        //{
+        public void CanCurrentCardBeathOtherCard_ThrowsErrorForSameCard()
+        {
+            var currentCard = new Card(1, Suits.CLUBS);
+            var otherCard = new Card(1, Suits.CLUBS);
 
-        //}
+            Assert.That(() => _Sut.CanCurrentCardBeatOtherCard(currentCard, otherCard), Throws.Exception.EqualTo("The two cards are the same"));
+        }
 
     }
 }
