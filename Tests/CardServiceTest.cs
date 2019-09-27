@@ -122,5 +122,6 @@ namespace Tests
             Assert.That(() => _Sut.CanCurrentCardBeatOtherCard(currentCard, otherCard), Throws.Exception.Message.EqualTo("The two cards are the same"));
         }
 
+        //TODO make test to check start player
     }
 }

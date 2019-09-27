@@ -71,6 +71,17 @@ namespace SixCard.Modules
             return ReplyAsync("Game has started");
         }
 
+        [Command("play")]
+        public Task Play([Remainder]string input)
+        {
+            //parse string
+            //find that player using Context.user 
+            //check if that card even exist in that player hand
+            //track is it's the lead
+            // iterate to the next player
+            return Task.CompletedTask;
+        }
+
         [Command("Draw")]
         [Summary("Testing Draw Methods")]
         public Task Draw()
