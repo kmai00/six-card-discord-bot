@@ -9,7 +9,7 @@ namespace SixCard.Modules
 {
     public class SixCardModule : ModuleBase<SocketCommandContext>
     {
-        //Dependcy injected
+        //Dependency injected
         public CardService _CardService { get; set; }
         public GameStateService _GameState { get; set; }
 
@@ -62,7 +62,13 @@ namespace SixCard.Modules
                 var cards = string.Join("\n", player.Cards);
                 player.User.SendMessageAsync($"Your hand is:\n{cards}");
             }
-            return ReplyAsync("Cards have been delt!");
+            ReplyAsync("Cards have been delt!");
+
+
+            var startPlayer = _GameState.ChooseStartPlayer();
+            startPlayer.User.SendMessageAsync($"You start the round");
+
+            return ReplyAsync("Game has started");
         }
 
         [Command("Draw")]
