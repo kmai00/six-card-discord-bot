@@ -9,6 +9,7 @@ using SixCard.Services;
 
 namespace Tests
 {
+
     [TestFixture]
     public class GameStateTest
     {

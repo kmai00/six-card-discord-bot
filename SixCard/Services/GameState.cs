@@ -36,16 +36,27 @@ namespace SixCard.Services
 
         public Player ChooseStartPlayer()
         {
-            foreach (var player in Players)
-            {
-                player.IsLeading = false;
-            }
-
+            ClearStartPlayers();
             var index = new Random().Next(0, Players.Count);
             var startPlayer = Players[index];
             startPlayer.IsLeading = true;
 
             return startPlayer;
+        }
+
+        public void SetStartingPlayer(Player player)
+        {
+            ClearStartPlayers();
+            var startingPlayer = Players.Single(p => p.Id == player.Id);
+            startingPlayer.IsLeading = true;
+        }
+
+        private void ClearStartPlayers()
+        {
+            foreach (var player in Players)
+            {
+                player.IsLeading = false;
+            }
         }
     }
 }

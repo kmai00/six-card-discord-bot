@@ -14,10 +14,12 @@ namespace SixCard.Dtos
         public Player(SocketUser user)
         {
             User = user;
+            Id = user.Id;
             Cards = new List<Card>();
         }
 
         public SocketUser User { get; private set; }
+        public ulong Id { get; set; }
 
         public bool IsLeading { get; set; }
 
