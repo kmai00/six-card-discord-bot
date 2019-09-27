@@ -46,7 +46,7 @@ namespace SixCard.Modules
                 return ReplyAsync($"{user.Username} has already joined...");
             }
 
-            _GameState.AddPlayer(user);
+            _GameState.AddPlayer(new Player(user));
             return ReplyAsync($"{user.Username} has joined the game!");
         }
 

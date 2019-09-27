@@ -6,6 +6,11 @@ namespace SixCard.Dtos
     public class Player
     {
 
+        public Player()
+        {
+            Cards = new List<Card>();
+        }
+
         public Player(SocketUser user)
         {
             User = user;
@@ -13,6 +18,8 @@ namespace SixCard.Dtos
         }
 
         public SocketUser User { get; private set; }
+
+        public bool IsLeading { get; set; }
 
         public List<Card> Cards { get; set; }
 

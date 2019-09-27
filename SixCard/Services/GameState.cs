@@ -1,14 +1,14 @@
-﻿using Discord.WebSocket;
+﻿using System;
+using Discord.WebSocket;
 using SixCard.Dtos;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SixCard.Services
 {
     public class GameStateService
     {
+        //TODO pretty sure sense this is exposing the Players, it will still be modified
         public static List<Card> Deck { get; private set; }
 
         public static List<Player> Players { get; private set; }
@@ -24,14 +24,28 @@ namespace SixCard.Services
             Deck = deck;
         }
 
-        public void AddPlayer(SocketUser player)
+        public void AddPlayer(Player player)
         {
-            Players.Add(new Player(player));
+            Players.Add(player);
         }
 
         public bool HasJoined(string username)
         {
             return Players.Any(p => p.Name == username);
+        }
+
+        public Player ChooseStartPlayer()
+        {
+            foreach (var player in Players)
+            {
+                player.IsLeading = false;
+            }
+
+            var index = new Random().Next(0, Players.Count);
+            var startPlayer = Players[index];
+            startPlayer.IsLeading = true;
+
+            return startPlayer;
         }
     }
 }

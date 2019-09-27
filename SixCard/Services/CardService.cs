@@ -50,7 +50,7 @@ namespace SixCard.Services
         {
             if (currentCard.Equals(otherCard))
             {
-                throw new Exception("The two cards are the same.");
+                throw new Exception("The two cards are the same");
             }
 
             if (currentCard.Suit != otherCard.Suit)

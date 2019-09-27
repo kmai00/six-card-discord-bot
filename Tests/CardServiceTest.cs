@@ -10,7 +10,7 @@ using System.Linq;
 namespace Tests
 {
     [TestFixture]
-    public class CardServiceTests
+    public class CardServiceTest
     {
         CardService _Sut;
 
@@ -113,12 +113,13 @@ namespace Tests
             Assert.AreEqual(expectedResult, result);
         }
 
+        [Test]
         public void CanCurrentCardBeathOtherCard_ThrowsErrorForSameCard()
         {
             var currentCard = new Card(1, Suits.CLUBS);
             var otherCard = new Card(1, Suits.CLUBS);
 
-            Assert.That(() => _Sut.CanCurrentCardBeatOtherCard(currentCard, otherCard), Throws.Exception.EqualTo("The two cards are the same"));
+            Assert.That(() => _Sut.CanCurrentCardBeatOtherCard(currentCard, otherCard), Throws.Exception.Message.EqualTo("The two cards are the same"));
         }
 
     }
