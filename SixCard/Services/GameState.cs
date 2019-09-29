@@ -34,7 +34,7 @@ namespace SixCard.Services
             return Players.Any(p => p.Name == username);
         }
 
-        public Player ChooseStartPlayer()
+        public Player ChooseRandomStartPlayer()
         {
             ClearStartPlayers();
             var index = new Random().Next(0, Players.Count);

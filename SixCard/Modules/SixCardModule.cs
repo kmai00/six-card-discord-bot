@@ -65,7 +65,7 @@ namespace SixCard.Modules
             ReplyAsync("Cards have been delt!");
 
 
-            var startPlayer = _GameState.ChooseStartPlayer();
+            var startPlayer = _GameState.ChooseRandomStartPlayer();
             startPlayer.User.SendMessageAsync($"You start the round");
 
             return ReplyAsync("Game has started");
