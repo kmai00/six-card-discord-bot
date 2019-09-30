@@ -126,7 +126,7 @@ namespace Tests
         [TestCase("0D", "Input: '0D' is not valid.\n'0' is not a valid card value.")]
         public void GetCardFromInput_ThrowsException(string input, string expectedErrorMessage)
         {
-            Assert.That(() => _Sut.GetCardFromInput("1Clubs"), Throws.Exception.Message.EqualTo(expectedErrorMessage));
+            Assert.That(() => _Sut.GetCardFromInput(input), Throws.Exception.Message.EqualTo(expectedErrorMessage));
         }
     }
 }
