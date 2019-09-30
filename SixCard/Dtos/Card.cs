@@ -34,19 +34,19 @@ namespace SixCard.Dtos
         public override string ToString()
         {
             var value = "";
-            if (Value == 11)
+            if (Value == DefaultValues.Jack)
             {
                 value = "J";
             }
-            else if (Value == 12)
+            else if (Value == DefaultValues.Queen)
             {
                 value = "Q";
             }
-            else if (Value == 13)
+            else if (Value == DefaultValues.King)
             {
                 value = "K";
             }
-            else if (Value == 14)
+            else if (Value == DefaultValues.Ace)
             {
                 value = "A";
             }

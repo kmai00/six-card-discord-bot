@@ -16,7 +16,7 @@ namespace SixCard.Services
 
             foreach (var suit in (Suits[])Enum.GetValues(typeof(Suits)))
             {
-                for (int i = 0; i < DefaultValues.NumberOfCards; i++)
+                for (int i = 0; i < DefaultValues.NumberOfCardsPerSuit; i++)
                 {
                     deck.Add(new Card(i + 2, suit));
                 }
@@ -43,6 +43,28 @@ namespace SixCard.Services
         {
             var result = Draw(deck, 1);
             return new Tuple<Card, List<Card>>(result.Item1.First(), result.Item2);
+        }
+
+        public Card GetCardFromInput(string input)
+        {
+            if (input.Length != 2)
+            {
+                throw new Exception($"Input: '{input}' is not valid.\n" +
+                    $"Please enter the two character short hand such as 'AH' for Ace Hearts.");
+            }
+
+            var value = input[0];
+            if (value < DefaultValues.LowestCardValue || value > DefaultValues.Ace)
+            {
+                throw new Exception($"Input: '{input}' is not valid.\n" +
+                    $"'{value}' is not a valid card value.");
+            }
+
+            var suit = input[1];
+
+
+
+            return null;
         }
 
         //Todo determine if I want to override the > operator

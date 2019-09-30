@@ -30,7 +30,7 @@ namespace Tests
             int cardIndex = 0;
             foreach (var suit in (Suits[])Enum.GetValues(typeof(Suits)))
             {
-                for (int i = 0; i < DefaultValues.NumberOfCards; i++)
+                for (int i = 0; i < DefaultValues.NumberOfCardsPerSuit; i++)
                 {
                     Assert.AreEqual(i + 2, result[cardIndex].Value);
                     Assert.AreEqual(suit, result[cardIndex].Suit);
@@ -120,6 +120,13 @@ namespace Tests
             var otherCard = new Card(1, Suits.CLUBS);
 
             Assert.That(() => _Sut.CanCurrentCardBeatOtherCard(currentCard, otherCard), Throws.Exception.Message.EqualTo("The two cards are the same"));
+        }
+
+        [TestCase("1Clubs", "Input: '1Clubs' is not valid.\nPlease enter the two character short hand such as 'AH' for Ace Hearts.")]
+        [TestCase("0D", "Input: '0D' is not valid.\n'0' is not a valid card value.")]
+        public void GetCardFromInput_ThrowsException(string input, string expectedErrorMessage)
+        {
+            Assert.That(() => _Sut.GetCardFromInput("1Clubs"), Throws.Exception.Message.EqualTo(expectedErrorMessage));
         }
     }
 }
