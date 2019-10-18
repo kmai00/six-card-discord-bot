@@ -33,29 +33,29 @@ namespace SixCard.Dtos
 
         public override string ToString()
         {
-            var value = "";
+            var value = string.Empty;
             if (Value == DefaultValues.Jack)
             {
-                value = "J";
+                value = DefaultValues.JackDisplay;
             }
             else if (Value == DefaultValues.Queen)
             {
-                value = "Q";
+                value = DefaultValues.QueenDisplay;
             }
             else if (Value == DefaultValues.King)
             {
-                value = "K";
+                value = DefaultValues.KingDisplay;
             }
             else if (Value == DefaultValues.Ace)
             {
-                value = "A";
+                value = DefaultValues.AceDisplay;
             }
             else
             {
                 value = Value.ToString();
             }
 
-            var suit = "";
+            var suit = string.Empty;
             switch (Suit)
             {
                 case Suits.CLUBS:

@@ -53,30 +53,59 @@ namespace SixCard.Services
                     $"Please enter the two character short hand such as 'AH' for Ace Hearts.");
             }
 
-            // This if statement need to account for character values.
-            // TODO contains the special character and number and convert it
-            string valueString;
+            string valueInput;
+            char suitInput;
             if (input.Length == 2)
             {
-                valueString = input[0].ToString();
+                valueInput = input[0].ToString();
+                suitInput = input[1];
             }
             else
             {
-                valueString = input.Substring(0, 2);
+                valueInput = input.Substring(0, 2);
+                suitInput = input[2];
             }
 
-            var isNumericValue = int.TryParse(valueString, out var valueInt);
+            var isNumericValue = int.TryParse(valueInput, out var valueInt);
             if (
                 (valueInt < DefaultValues.LowestCardValue || valueInt > DefaultValues.HighestNumericalCardValue) && isNumericValue ||
-                !isNumericValue && !DefaultValues.DisplayValues.Contains(valueString)
+                !isNumericValue && !DefaultValues.NonNumericalValueDisplays.Contains(valueInput)
                 )
             {
                 throw new Exception($"Input: '{input}' is not valid.\n" +
-                    $"'{valueString}' is not a valid card value.");
+                    $"'{valueInput}' is not a valid card value.");
             }
 
-            var suit = input[1];
+            int cardValue;
+            if (isNumericValue)
+            {
+                cardValue = valueInt;
+            }
+            else
+            {
+                if (valueInput == DefaultValues.JackDisplay)
+                {
+                    cardValue = DefaultValues.Jack;
+                }
+                else if (valueInput == DefaultValues.QueenDisplay)
+                {
+                    cardValue = DefaultValues.Queen;
+                }
+                else if (valueInput == DefaultValues.KingDisplay)
+                {
+                    cardValue = DefaultValues.King;
+                }
+                else
+                {
+                    cardValue = DefaultValues.Ace;
+                }
+            }
 
+            if (!DefaultValues.SuitValues.Contains(suitInput))
+            {
+                throw new Exception($"Input: '{input}' is not valid.\n" +
+                    $"'{suitInput}' is not a valid card suit.");
+            }
 
 
             return null;

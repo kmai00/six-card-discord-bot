@@ -16,11 +16,13 @@
         public const string KingDisplay = "K";
         public const string AceDisplay = "A";
 
-        public static string[] DisplayValues = new string[] { JackDisplay, QueenDisplay, KingDisplay, AceDisplay };
+        public static string[] NonNumericalValueDisplays = new string[] { JackDisplay, QueenDisplay, KingDisplay, AceDisplay };
 
         public const char Clubs = 'C';
         public const char Diamonds = 'D';
         public const char Hearts = 'H';
         public const char Spades = 'S';
+
+        public static char[] SuitValues = new char[] { Clubs, Diamonds, Hearts, Spades };
     }
 }
