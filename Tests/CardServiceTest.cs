@@ -124,6 +124,9 @@ namespace Tests
 
         [TestCase("1Clubs", "Input: '1Clubs' is not valid.\nPlease enter the two character short hand such as 'AH' for Ace Hearts.")]
         [TestCase("0D", "Input: '0D' is not valid.\n'0' is not a valid card value.")]
+        [TestCase("11D", "Input: '11D' is not valid.\n'11' is not a valid card value.")]
+        [TestCase("DED", "Input: 'DED' is not valid.\n'DE' is not a valid card value.")]
+        //[TestCase("AS", "Input: 'AS' is not valid.\n'S' is not a valid card suit.")]
         public void GetCardFromInput_ThrowsException(string input, string expectedErrorMessage)
         {
             Assert.That(() => _Sut.GetCardFromInput(input), Throws.Exception.Message.EqualTo(expectedErrorMessage));

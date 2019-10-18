@@ -47,17 +47,32 @@ namespace SixCard.Services
 
         public Card GetCardFromInput(string input)
         {
-            if (input.Length != 2)
+            if (input.Length > 3)
             {
                 throw new Exception($"Input: '{input}' is not valid.\n" +
                     $"Please enter the two character short hand such as 'AH' for Ace Hearts.");
             }
 
-            var value = input[0];
-            if (value < DefaultValues.LowestCardValue || value > DefaultValues.Ace)
+            // This if statement need to account for character values.
+            // TODO contains the special character and number and convert it
+            string valueString;
+            if (input.Length == 2)
+            {
+                valueString = input[0].ToString();
+            }
+            else
+            {
+                valueString = input.Substring(0, 2);
+            }
+
+            var isNumericValue = int.TryParse(valueString, out var valueInt);
+            if (
+                (valueInt < DefaultValues.LowestCardValue || valueInt > DefaultValues.HighestNumericalCardValue) && isNumericValue ||
+                !isNumericValue && !DefaultValues.DisplayValues.Contains(valueString)
+                )
             {
                 throw new Exception($"Input: '{input}' is not valid.\n" +
-                    $"'{value}' is not a valid card value.");
+                    $"'{valueString}' is not a valid card value.");
             }
 
             var suit = input[1];
