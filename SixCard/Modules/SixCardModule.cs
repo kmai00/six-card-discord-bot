@@ -2,7 +2,6 @@
 using Discord.Commands;
 using SixCard.Dtos;
 using SixCard.Services;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SixCard.Modules

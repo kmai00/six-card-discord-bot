@@ -10,13 +10,17 @@ namespace SixCard.Services
     {
         //TODO pretty sure sense this is exposing the Players, it will still be modified
         public static List<Card> Deck { get; private set; }
-
         public static List<Player> Players { get; private set; }
+
+        public static Card WinningCard { get; private set; }
+
+        private static int CurrentPlayerIndex { get; set; }
 
         public GameStateService()
         {
             Deck = new List<Card>();
             Players = new List<Player>();
+            CurrentPlayerIndex = 0;
         }
 
         public void SetDeck(List<Card> deck)
@@ -27,6 +31,11 @@ namespace SixCard.Services
         public void AddPlayer(Player player)
         {
             Players.Add(player);
+        }
+
+        public void AddPlayers(List<Player> players)
+        {
+            Players.AddRange(players);
         }
 
         public bool HasJoined(string username)
@@ -47,7 +56,8 @@ namespace SixCard.Services
         public void SetStartingPlayer(Player player)
         {
             ClearStartPlayers();
-            var startingPlayer = Players.Single(p => p.Id == player.Id);
+            CurrentPlayerIndex = Players.FindIndex(p => p.Id == player.Id);
+            var startingPlayer = Players[CurrentPlayerIndex];
             startingPlayer.IsLeading = true;
         }
 
@@ -57,6 +67,25 @@ namespace SixCard.Services
             {
                 player.IsLeading = false;
             }
+        }
+
+        // Get the current player's turn
+        public Player GetCurrentPlayer()
+        {
+            return Players[CurrentPlayerIndex];
+        }
+
+        public Player NextTurn()
+        {
+            var nextIndex = CurrentPlayerIndex + 1;
+            CurrentPlayerIndex = nextIndex < Players.Count ? nextIndex : 0;
+
+            return Players[CurrentPlayerIndex];
+        }
+
+        public void SetWinningCard(Card card)
+        {
+            WinningCard = card;
         }
     }
 }

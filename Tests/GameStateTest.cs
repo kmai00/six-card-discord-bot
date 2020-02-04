@@ -62,5 +62,29 @@ namespace Tests
             Assert.AreEqual(player_1.Id, GameStateService.Players.Single(p => p.IsLeading).Id);
             Assert.IsTrue(GameStateService.Players.Where(p => !p.IsLeading).ToList().Count == 2);
         }
+
+        [Test]
+        public void NexTurn()
+        {
+            var player_1 = new Player
+            {
+                Id = 1,
+            };
+            var player_2 = new Player
+            {
+                Id = 2,
+            };
+            _Sut.AddPlayers(new List<Player> { player_1, player_2 });
+            _Sut.SetStartingPlayer(player_2);
+
+            var currentPlayer = _Sut.GetCurrentPlayer();
+            Assert.AreEqual(player_2.Id, currentPlayer.Id);
+
+            currentPlayer = _Sut.NextTurn();
+            Assert.AreEqual(player_1.Id, currentPlayer.Id);
+
+            currentPlayer = _Sut.NextTurn();
+            Assert.AreEqual(player_2.Id, currentPlayer.Id);
+        }
     }
 }
