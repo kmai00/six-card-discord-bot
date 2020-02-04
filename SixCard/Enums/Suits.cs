@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace SixCard.Enums
+﻿namespace SixCard.Enums
 {
     public enum Suits
     {

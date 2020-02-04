@@ -132,11 +132,17 @@ namespace Tests
             Assert.That(() => _Sut.GetCardFromInput(input), Throws.Exception.Message.EqualTo(expectedErrorMessage));
         }
 
-        //TODO actually returns stuff
         [Test]
         public void GetCardFromInput_CorrectlyConverts()
         {
+            var input = "2D";
+            var result = _Sut.GetCardFromInput(input);
 
+            Assert.AreEqual(new Card(2, Suits.DIAMONDS), result);
+
+            input = "JH";
+            result = _Sut.GetCardFromInput(input);
+            Assert.AreEqual(new Card(11, Suits.HEARTS), result);
         }
     }
 }

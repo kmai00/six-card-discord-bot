@@ -4,7 +4,7 @@
     {
         public const int NumberOfCardsPerSuit = 13;
 
-        public const int LowestCardValue = 2;
+        public const int LowestNumericCardValue = 2;
         public const int HighestNumericalCardValue = 10;
         public const int Jack = 11;
         public const int Queen = 12;

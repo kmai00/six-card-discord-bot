@@ -68,7 +68,7 @@ namespace SixCard.Services
 
             var isNumericValue = int.TryParse(valueInput, out var valueInt);
             if (
-                (valueInt < DefaultValues.LowestCardValue || valueInt > DefaultValues.HighestNumericalCardValue) && isNumericValue ||
+                (valueInt < DefaultValues.LowestNumericCardValue || valueInt > DefaultValues.HighestNumericalCardValue) && isNumericValue ||
                 !isNumericValue && !DefaultValues.NonNumericalValueDisplays.Contains(valueInput)
                 )
             {
@@ -107,8 +107,24 @@ namespace SixCard.Services
                     $"'{suitInput}' is not a valid card suit.");
             }
 
+            Suits suitValue = 0;
+            switch (suitInput)
+            {
+                case DefaultValues.Clubs:
+                    suitValue = Suits.CLUBS;
+                    break;
+                case DefaultValues.Diamonds:
+                    suitValue = Suits.DIAMONDS;
+                    break;
+                case DefaultValues.Hearts:
+                    suitValue = Suits.HEARTS;
+                    break;
+                case DefaultValues.Spades:
+                    suitValue = Suits.SPADES;
+                    break;
+            }
 
-            return null;
+            return new Card(cardValue, suitValue);
         }
 
         //Todo determine if I want to override the > operator
