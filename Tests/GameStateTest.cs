@@ -80,10 +80,10 @@ namespace Tests
             var currentPlayer = _Sut.GetCurrentPlayer();
             Assert.AreEqual(player_2.Id, currentPlayer.Id);
 
-            currentPlayer = _Sut.NextTurn();
+            currentPlayer = _Sut.NextTurnPlayer();
             Assert.AreEqual(player_1.Id, currentPlayer.Id);
 
-            currentPlayer = _Sut.NextTurn();
+            currentPlayer = _Sut.NextTurnPlayer();
             Assert.AreEqual(player_2.Id, currentPlayer.Id);
         }
     }

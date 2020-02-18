@@ -75,12 +75,19 @@ namespace SixCard.Services
             return Players[CurrentPlayerIndex];
         }
 
-        public Player NextTurn()
+        public Player NextTurnPlayer(bool isFinalRound = false)
         {
-            var nextIndex = CurrentPlayerIndex + 1;
-            CurrentPlayerIndex = nextIndex < Players.Count ? nextIndex : 0;
+            Player player = null;
+            do
+            {
+                var nextIndex = CurrentPlayerIndex + 1;
+                CurrentPlayerIndex = nextIndex < Players.Count ? nextIndex : 0;
 
-            return Players[CurrentPlayerIndex];
+                player = Players[CurrentPlayerIndex];
+
+            } while (isFinalRound && !player.IsInFinalRound);
+
+            return player;
         }
 
         public void SetWinningCard(Card card)

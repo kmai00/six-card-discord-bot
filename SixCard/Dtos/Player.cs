@@ -23,6 +23,8 @@ namespace SixCard.Dtos
 
         public bool IsLeading { get; set; }
 
+        public bool IsInFinalRound { get; set; }
+
         public List<Card> Cards { get; set; }
 
         public string Name { get { return User.Username; } }
